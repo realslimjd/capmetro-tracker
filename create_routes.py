@@ -1,6 +1,10 @@
+import logging
+
 from dataclasses import dataclass
 from enum import Enum
 import geopandas as gpd
+
+logger = logging.getLogger(__name__)
 
 
 class RouteType(Enum):
@@ -42,5 +46,6 @@ def generate_route_info(
     routes = gpd.read_file(route_filename)
     routes_latlon = routes.to_crs(epsg=4326)
     routes_latlon = color_routes(routes_latlon, route_types, route_colors)
+    logger.debug(routes_latlon)
 
     return routes_latlon

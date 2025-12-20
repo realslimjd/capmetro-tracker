@@ -55,5 +55,6 @@ class CreateMap:
         vehicles.plot(ax=ax, color="red", markersize=50, marker="o", label="Vehicles")
 
         plt.title("Capital Metro Routes and Live Vehicles")
-        plt.show()
+        # For some reason the png doesn't generate an image if we show() it first
+        # plt.show()
         plt.savefig("routes_test.png", dpi=300, bbox_inches="tight")

@@ -1,6 +1,10 @@
+import logging
+
 import geopandas as gpd
 import json
 from shapely.geometry import Point
+
+logger = logging.getLogger(__name__)
 
 
 def create_vehicle_location_dataframe(
@@ -32,6 +36,6 @@ def create_vehicle_location_dataframe(
             )
 
     vehicles_gdf = gpd.GeoDataFrame(vehicle_coords, crs="EPSG:4326")
-    print(vehicles_gdf)
+    logger.debug(vehicles_gdf)
 
     return vehicles_gdf
