@@ -52,9 +52,10 @@ class CreateMap:
         )
 
         vehicles = self.create_vehicle_location_dataframe()
-        vehicles.plot(ax=ax, color="red", markersize=50, marker="o", label="Vehicles")
+        vehicles.plot(ax=ax, color="red", markersize=20, marker="o", label="Vehicles")
 
-        plt.title("Capital Metro Routes and Live Vehicles")
+        ax.axis("off")
+        plt.title("Capital Metro Routes And Vehicle Locations")
         # For some reason the png doesn't generate an image if we show() it first
         # plt.show()
         plt.savefig("routes_test.png", dpi=300, bbox_inches="tight")
