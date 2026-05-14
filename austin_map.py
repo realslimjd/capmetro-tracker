@@ -38,5 +38,6 @@ class AustinMap(CreateMap):
     route_colors = AUSTIN_ROUTE_COLORS
 
 
-austin = AustinMap()
-austin.create_plot()
+if __name__ == "__main__":
+    austin = AustinMap()
+    austin.create_plot()

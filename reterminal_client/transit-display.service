@@ -1,0 +1,30 @@
+[Unit]
+Description=Austin Transit Display poller
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+# Edit these paths/values to match your deployment:
+Environment=SERVER_URL=http://CHANGE_ME:5000
+Environment=MODE=random
+# Environment=ROUTE_ID=801   # required when MODE=line
+Environment=POLL_SECONDS=60
+Environment=OUTPUT_PATH=/tmp/transit.png
+Environment=VIEWER=feh
+
+# If VIEWER=feh, start feh once via ExecStartPre. It will watch the
+# file and reload automatically every 60 s.
+ExecStartPre=/bin/sh -c 'pkill -f "feh.*transit.png" || true'
+ExecStartPre=/bin/sh -c 'touch /tmp/transit.png'
+ExecStartPre=/usr/bin/feh --fullscreen --hide-pointer --reload 60 /tmp/transit.png &
+
+ExecStart=/usr/bin/python3 /opt/transit-display/display.py
+
+Restart=always
+RestartSec=10
+User=pi
+Group=pi
+
+[Install]
+WantedBy=multi-user.target
